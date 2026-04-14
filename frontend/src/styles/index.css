@@ -1,0 +1,272 @@
+:root {
+  font-family: "Manrope", sans-serif;
+  color: #f5f1e8;
+  background:
+    radial-gradient(circle at top left, rgba(255, 120, 68, 0.25), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(72, 170, 191, 0.22), transparent 35%),
+    linear-gradient(135deg, #151311, #0d1016 62%, #12171f);
+  line-height: 1.5;
+  font-weight: 400;
+  --panel: rgba(18, 20, 26, 0.84);
+  --panel-strong: rgba(28, 31, 39, 0.95);
+  --border: rgba(255, 255, 255, 0.08);
+  --accent: #ff8a4c;
+  --accent-strong: #ffc06a;
+  --muted: #aaa6a0;
+  --success: #9fd8b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 380px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  padding: 28px;
+  border-right: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+  background: rgba(8, 10, 14, 0.68);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.workspace {
+  padding: 28px;
+  display: flex;
+  align-items: stretch;
+}
+
+.brand-block h1,
+.module-card__header h3 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-strong);
+  font-size: 0.72rem;
+}
+
+.hero-copy,
+.module-card__header p,
+.status-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.uploader,
+.module-card,
+.status-card,
+.compare-panel {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+}
+
+.uploader {
+  display: grid;
+  gap: 4px;
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+
+.uploader__input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.uploader__label {
+  font-weight: 700;
+}
+
+.uploader__hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.tab-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.tab-button {
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #f6f4ef;
+  border-radius: 14px;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.tab-button:hover {
+  transform: translateY(-1px);
+}
+
+.tab-button--active {
+  background: linear-gradient(135deg, var(--accent), #ff5c58);
+  color: #111;
+}
+
+.status-card,
+.module-card {
+  padding: 18px;
+}
+
+.status-card span {
+  color: var(--success);
+  font-weight: 700;
+}
+
+.error-text {
+  color: #ff9f8c;
+}
+
+.module-card {
+  display: grid;
+  gap: 16px;
+}
+
+.control-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.control {
+  display: grid;
+  gap: 8px;
+}
+
+.control span {
+  color: #f7e6d1;
+}
+
+.control input[type="range"] {
+  accent-color: var(--accent);
+}
+
+.control strong {
+  color: var(--accent-strong);
+}
+
+.control select {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.actions button {
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), #ff5c58);
+  color: #111;
+  font-weight: 700;
+}
+
+.actions .button-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.compare-panel {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 640px;
+}
+
+.compare-panel__header {
+  font-family: "Space Grotesk", sans-serif;
+  margin-bottom: 14px;
+  color: #f9c784;
+}
+
+.compare-image,
+.compare-empty {
+  width: 100%;
+  flex: 1;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.compare-image {
+  object-fit: contain;
+}
+
+.compare-empty {
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+}
+
+@media (max-width: 1080px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace {
+    padding-top: 0;
+  }
+
+  .compare-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-panel {
+    min-height: 360px;
+  }
+}
