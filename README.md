@@ -1,5 +1,7 @@
 # Image Lab
 
+![App UI](images/UI.png)
+
 Hybrid image processing app with a React frontend and a FastAPI + OpenCV backend.
 
 ## Structure
