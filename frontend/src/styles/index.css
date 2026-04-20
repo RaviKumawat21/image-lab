@@ -100,6 +100,12 @@ button {
   padding: 18px;
   position: relative;
   overflow: hidden;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.uploader:hover {
+  border-color: var(--accent);
+  background: var(--panel-strong);
 }
 
 .uploader__input {
@@ -134,9 +140,10 @@ button {
 
 .tab-button:hover {
   transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.tab-button--active {
+.tab-button--active, .tab-button--active:hover {
   background: linear-gradient(135deg, var(--accent), #ff5c58);
   color: #111;
 }
@@ -202,11 +209,25 @@ button {
   background: linear-gradient(135deg, var(--accent), #ff5c58);
   color: #111;
   font-weight: 700;
+  transition: transform 0.2s, filter 0.2s, opacity 0.2s;
+}
+
+.actions button:not(:disabled):hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.actions button:not(:disabled):active {
+  transform: translateY(0);
 }
 
 .actions .button-secondary {
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
+}
+
+.actions .button-secondary:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .actions button:disabled {

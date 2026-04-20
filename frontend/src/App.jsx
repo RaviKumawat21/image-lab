@@ -12,6 +12,7 @@ import { debounce } from "./services/debounce";
 
 function App() {
   const [activeTab, setActiveTab] = useState("intensity");
+  const [activeAction, setActiveAction] = useState("");
   const [sourceFile, setSourceFile] = useState(null);
   const [beforeSrc, setBeforeSrc] = useState("");
   const [afterSrc, setAfterSrc] = useState("");
@@ -61,6 +62,7 @@ function App() {
   const debouncedGamma = useMemo(() => debounce((file, value) => imageApi.gamma(file, value), 250), []);
 
   const onFileChange = (file) => {
+    setActiveAction("");
     setSourceFile(file);
     setError("");
     setAfterSrc((current) => {
@@ -78,14 +80,22 @@ function App() {
     intensity: (
       <Intensity
         gamma={gamma}
+        activeAction={activeAction}
         onGammaChange={(value) => {
           setGamma(value);
           if (sourceFile) {
+            setActiveAction("gamma");
             runProcessing((file) => debouncedGamma(file, value));
           }
         }}
-        onApplyGamma={() => runProcessing((file) => imageApi.gamma(file, gamma))}
-        onApplyNegative={() => runProcessing((file) => imageApi.negative(file))}
+        onApplyGamma={() => {
+          setActiveAction("gamma");
+          runProcessing((file) => imageApi.gamma(file, gamma));
+        }}
+        onApplyNegative={() => {
+          setActiveAction("negative");
+          runProcessing((file) => imageApi.negative(file));
+        }}
         disabled={!sourceFile}
         loading={loading}
       />
@@ -94,10 +104,17 @@ function App() {
       <Histogram
         clipLimit={clipLimit}
         tileSize={tileSize}
+        activeAction={activeAction}
         onClipChange={setClipLimit}
         onTileChange={setTileSize}
-        onEqualize={() => runProcessing((file) => imageApi.equalize(file))}
-        onAdaptiveEqualize={() => runProcessing((file) => imageApi.adaptiveEqualize(file, clipLimit, tileSize))}
+        onEqualize={() => {
+          setActiveAction("equalize");
+          runProcessing((file) => imageApi.equalize(file));
+        }}
+        onAdaptiveEqualize={() => {
+          setActiveAction("adaptiveEqualize");
+          runProcessing((file) => imageApi.adaptiveEqualize(file, clipLimit, tileSize));
+        }}
         disabled={!sourceFile}
         loading={loading}
       />
@@ -108,13 +125,23 @@ function App() {
         sharpenStrength={sharpenStrength}
         edgeLow={edgeLow}
         edgeHigh={edgeHigh}
+        activeAction={activeAction}
         onBlurChange={setBlurKernel}
         onSharpenChange={setSharpenStrength}
         onEdgeLowChange={setEdgeLow}
         onEdgeHighChange={setEdgeHigh}
-        onBlur={() => runProcessing((file) => imageApi.blur(file, blurKernel))}
-        onSharpen={() => runProcessing((file) => imageApi.sharpen(file, sharpenStrength))}
-        onEdge={() => runProcessing((file) => imageApi.edge(file, edgeLow, edgeHigh))}
+        onBlur={() => {
+          setActiveAction("blur");
+          runProcessing((file) => imageApi.blur(file, blurKernel));
+        }}
+        onSharpen={() => {
+          setActiveAction("sharpen");
+          runProcessing((file) => imageApi.sharpen(file, sharpenStrength));
+        }}
+        onEdge={() => {
+          setActiveAction("edge");
+          runProcessing((file) => imageApi.edge(file, edgeLow, edgeHigh));
+        }}
         disabled={!sourceFile}
         loading={loading}
       />
@@ -122,9 +149,16 @@ function App() {
     segmentation: (
       <Segmentation
         threshold={threshold}
+        activeAction={activeAction}
         onThresholdChange={setThreshold}
-        onThreshold={() => runProcessing((file) => imageApi.threshold(file, threshold))}
-        onOtsu={() => runProcessing((file) => imageApi.otsu(file))}
+        onThreshold={() => {
+          setActiveAction("threshold");
+          runProcessing((file) => imageApi.threshold(file, threshold));
+        }}
+        onOtsu={() => {
+          setActiveAction("otsu");
+          runProcessing((file) => imageApi.otsu(file));
+        }}
         disabled={!sourceFile}
         loading={loading}
       />
@@ -134,14 +168,16 @@ function App() {
         operation={morphOperation}
         kernelSize={morphKernel}
         iterations={morphIterations}
+        activeAction={activeAction}
         onOperationChange={setMorphOperation}
         onKernelChange={setMorphKernel}
         onIterationChange={setMorphIterations}
-        onApply={() =>
+        onApply={() => {
+          setActiveAction("morphology");
           runProcessing((file) =>
             imageApi.morphology(file, morphOperation, morphKernel, morphIterations),
-          )
-        }
+          );
+        }}
         disabled={!sourceFile}
         loading={loading}
       />
@@ -152,11 +188,7 @@ function App() {
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand-block">
-          <p className="eyebrow">Production Vision Stack</p>
           <h1>Image Lab</h1>
-          <p className="hero-copy">
-            Hybrid image processing with a React control plane and FastAPI + OpenCV execution.
-          </p>
         </div>
 
         <ImageUploader fileName={sourceFile?.name} onFileChange={onFileChange} />
@@ -175,7 +207,7 @@ function App() {
 
         <div className="status-card">
           <span>{loading ? "Processing..." : "Ready"}</span>
-          {error ? <p className="error-text">{error}</p> : <p>Backend-driven preview with modular processing routes.</p>}
+          {error && <p className="error-text">{error}</p>}
         </div>
 
         {tabProps[activeTab]}

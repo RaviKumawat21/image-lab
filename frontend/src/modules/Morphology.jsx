@@ -6,6 +6,7 @@ export default function Morphology({
   onKernelChange,
   onIterationChange,
   onApply,
+  activeAction,
   disabled,
   loading,
 }) {
@@ -49,7 +50,7 @@ export default function Morphology({
         <strong>{iterations}</strong>
       </label>
       <div className="actions">
-        <button onClick={onApply} disabled={disabled || loading}>
+        <button className={activeAction === "morphology" ? "" : "button-secondary"} onClick={onApply} disabled={disabled || loading}>
           Apply Morphology
         </button>
       </div>

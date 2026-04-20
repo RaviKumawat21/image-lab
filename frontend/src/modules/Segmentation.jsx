@@ -3,6 +3,7 @@ export default function Segmentation({
   onThresholdChange,
   onThreshold,
   onOtsu,
+  activeAction,
   disabled,
   loading,
 }) {
@@ -25,10 +26,10 @@ export default function Segmentation({
         <strong>{threshold}</strong>
       </label>
       <div className="actions">
-        <button onClick={onThreshold} disabled={disabled || loading}>
+        <button className={activeAction === "threshold" ? "" : "button-secondary"} onClick={onThreshold} disabled={disabled || loading}>
           Apply Threshold
         </button>
-        <button className="button-secondary" onClick={onOtsu} disabled={disabled || loading}>
+        <button className={activeAction === "otsu" ? "" : "button-secondary"} onClick={onOtsu} disabled={disabled || loading}>
           Apply Otsu
         </button>
       </div>

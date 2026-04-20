@@ -12,6 +12,7 @@ export default function Filtering({
   onBlur,
   onSharpen,
   onEdge,
+  activeAction,
   disabled,
   loading,
 }) {
@@ -30,13 +31,13 @@ export default function Filtering({
         onHighChange={onEdgeHighChange}
       />
       <div className="actions">
-        <button onClick={onBlur} disabled={disabled || loading}>
+        <button className={activeAction === "blur" ? "" : "button-secondary"} onClick={onBlur} disabled={disabled || loading}>
           Blur
         </button>
-        <button className="button-secondary" onClick={onSharpen} disabled={disabled || loading}>
+        <button className={activeAction === "sharpen" ? "" : "button-secondary"} onClick={onSharpen} disabled={disabled || loading}>
           Sharpen
         </button>
-        <button className="button-secondary" onClick={onEdge} disabled={disabled || loading}>
+        <button className={activeAction === "edge" ? "" : "button-secondary"} onClick={onEdge} disabled={disabled || loading}>
           Edge Detect
         </button>
       </div>

@@ -5,6 +5,7 @@ export default function Intensity({
   onGammaChange,
   onApplyGamma,
   onApplyNegative,
+  activeAction,
   disabled,
   loading,
 }) {
@@ -16,10 +17,10 @@ export default function Intensity({
       </div>
       <GammaControl value={gamma} onChange={onGammaChange} />
       <div className="actions">
-        <button onClick={onApplyGamma} disabled={disabled || loading}>
+        <button className={activeAction === "gamma" ? "" : "button-secondary"} onClick={onApplyGamma} disabled={disabled || loading}>
           Apply Gamma
         </button>
-        <button className="button-secondary" onClick={onApplyNegative} disabled={disabled || loading}>
+        <button className={activeAction === "negative" ? "" : "button-secondary"} onClick={onApplyNegative} disabled={disabled || loading}>
           Negative
         </button>
       </div>

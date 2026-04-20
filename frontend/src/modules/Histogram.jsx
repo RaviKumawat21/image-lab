@@ -7,6 +7,7 @@ export default function Histogram({
   onTileChange,
   onEqualize,
   onAdaptiveEqualize,
+  activeAction,
   disabled,
   loading,
 }) {
@@ -23,10 +24,10 @@ export default function Histogram({
         onTileChange={onTileChange}
       />
       <div className="actions">
-        <button onClick={onEqualize} disabled={disabled || loading}>
+        <button className={activeAction === "equalize" ? "" : "button-secondary"} onClick={onEqualize} disabled={disabled || loading}>
           Equalize
         </button>
-        <button className="button-secondary" onClick={onAdaptiveEqualize} disabled={disabled || loading}>
+        <button className={activeAction === "adaptiveEqualize" ? "" : "button-secondary"} onClick={onAdaptiveEqualize} disabled={disabled || loading}>
           Adaptive Equalize
         </button>
       </div>
