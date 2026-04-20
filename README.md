@@ -1,4 +1,8 @@
 # Image Lab 🖼️
+
+# [YouTube video Link](https://youtu.be/0V4IA96WCiw)
+
+
 **Hybrid Image Processing Platform**
 
 ![Image Lab Interface](images/intensity_gamma.png)
@@ -7,8 +11,9 @@
 Developed as a group project, it utilizes a modular architecture to seamlessly bridge a responsive frontend with high-performance OpenCV backend operations.
 
 ### 👥 Project Team (Group Six)
+
 * **Ravi Kumawat** (Roll No. 202351121)
-* **Sangramjeet Kumar** (Roll No. 202352329) 
+* **Sangramjeet Kumar** (Roll No. 202352329)
 * **Supervised by:** Prof. Jignesh Patel, *Indian Institute of Information Technology Vadodara (IIITV)*
 
 ---
@@ -32,7 +37,7 @@ Our codebase supports 5 foundational computer vision categories:
 * **Intensity Operations:** Gamma correction, Negative inversions.
 * **Histogram Processing:** Global equalization, Contrast Limited Adaptive Histogram Equalization (CLAHE).
 * **Spatial Filtering:** Gaussian Blur, Edge Sharpening, Canny Edge Detection.
-* **Segmentation:** Manual Binary Thresholding, Otsu's Statistical Thresholding. 
+* **Segmentation:** Manual Binary Thresholding, Otsu's Statistical Thresholding.
 * **Morphological Operations:** Erode, Dilate, Open (Noise Removal), Close (Gap Filling).
 
 ---
@@ -42,6 +47,7 @@ Our codebase supports 5 foundational computer vision categories:
 If you are cloning this repository, you will need to run the Backend API and the Frontend Server concurrently.
 
 ### 1. Start the FastAPI Backend
+
 The backend utilizes Python and OpenCV. Open a terminal and run the following:
 
 ```bash
@@ -58,9 +64,11 @@ pip install -r requirements.txt
 # Start the local ASGI server
 uvicorn app.main:app --reload
 ```
+
 *The backend will now be actively listening on `http://localhost:8000`.*
 
 ### 2. Start the React Frontend
+
 Open a **new, separate terminal window** and run the following:
 
 ```bash
